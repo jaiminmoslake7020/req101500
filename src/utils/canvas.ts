@@ -1,11 +1,11 @@
 // @ts-ignore
 import { Canvas, fabric } from 'fabric';
 import {
-    defaultNoticeWidth,
-    headingLeftPadding,
+    allowedHeadingAreaHeight,
+    allowedHeadingAreaWidth,
+    canvasWidth,
     headingText,
     infoWhiteBoxRect,
-    whiteReactBoxHeight,
 } from './data';
 
 export const hasCanvas = () => {
@@ -96,18 +96,10 @@ export const createText = (textString: string, textOptions:any) => {
     const text = new fabric.Text(textString, textOptions);
     const h1 = text.height as number;
     const w1 = text.width as number;
-    if (text.data.id === 'price-text') {
-        text.setOptions({
-            top: 10 + ((30 - h1) / 2),
-            left: (324 - (10 + 80)) + ((80 - w1) / 2)
-        })
-        bringToFront(text);
-    }
     if (text.data.id === 'title-text') {
-        const h = text.height as number;
         text.setOptions({
-            top: (defaultNoticeWidth / 2) + ((whiteReactBoxHeight - h) / 2),
-            left: headingLeftPadding
+            top:  ((allowedHeadingAreaHeight - h1) / 2),
+            left: ((allowedHeadingAreaWidth - w1) / 2)
         });
     }
     fabricCanvas.add(text);
@@ -143,9 +135,9 @@ export const initiateCanvasRender = (): Promise<boolean> => {
             }
         } else {
             // @ts-ignore
-            getCanvas().setWidth(defaultNoticeWidth);
+            getCanvas().setWidth(canvasWidth);
             // @ts-ignore
-            getCanvas().setHeight(defaultNoticeWidth);
+            getCanvas().setHeight(canvasWidth);
             resolve(false);
         }
     });

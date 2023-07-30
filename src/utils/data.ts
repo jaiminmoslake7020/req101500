@@ -1,4 +1,4 @@
-export const defaultNoticeWidth = 324;
+export const canvasWidth = 225;
 
 export const headingLeftPadding = 10;
 export const headingText = {
@@ -18,19 +18,21 @@ export const headingText = {
 };
 
 
-export const whiteReactBoxHeight = (defaultNoticeWidth / 2) - 10;
+
 export const infoWhiteBoxRect = {
     data: {
         id: 'info-white-box'
     },
     left: 0,
-    top: defaultNoticeWidth / 2,
-    width: defaultNoticeWidth,
-    height: whiteReactBoxHeight,
+    top: 0,
+    width: canvasWidth,
+    height: canvasWidth,
     strokeWidth: 0,
     stroke: 'white',
     fill: 'white',
     selectable: false,
 };
 
-export const allowedHeadingAreaWidth = (defaultNoticeWidth / 2) + (1 * (defaultNoticeWidth / 10));
+export const whiteReactBoxHeight = canvasWidth - 20;
+export const allowedHeadingAreaWidth = canvasWidth-20;
+export const allowedHeadingAreaHeight = allowedHeadingAreaWidth;

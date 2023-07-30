@@ -1,4 +1,4 @@
-import { defaultNoticeWidth, whiteReactBoxHeight, allowedHeadingAreaWidth } from './data';
+import {canvasWidth, whiteReactBoxHeight, allowedHeadingAreaWidth, allowedHeadingAreaHeight} from './data';
 
 let numberOfLines = 1;
 let allowedNumberOfLines = 4;
@@ -132,7 +132,6 @@ export function createPossibleLinesMatrixToMax(text:string):string[][][]{
     returnArray.push(createPossibleLines(text, maxLinesCanBe));
     maxLinesCanBe = maxLinesCanBe - 1;
   }
-  return returnArray;
   return filterOutSomeLines(cleanText, returnArray);
 }
 
@@ -152,10 +151,10 @@ export const getObjectWithCorrectFontSize = (obj:any, p:string[], fontSize: numb
   });
   const h1 = obj.height as number;
   const w1 = obj.width as number;
-  const allowedAreaWidth = allowedHeadingAreaWidth;
-  const topPadding = (defaultNoticeWidth / 2);
-  const newLeft = (allowedAreaWidth - w1) / 2;
-  const newTop = ((whiteReactBoxHeight - h1) / 2);
+  const topPadding = 10;
+  const leftPadding = 10;
+  const newLeft = (allowedHeadingAreaWidth - w1) / 2;
+  const newTop = (allowedHeadingAreaHeight - h1) / 2;
 
   const a1 = newLeft < 10;
   const b1 = newTop < 10;
@@ -163,14 +162,14 @@ export const getObjectWithCorrectFontSize = (obj:any, p:string[], fontSize: numb
   // console.log('obj in else', w1, h1, newLeft, newTop, fontSize, p);
   obj.setOptions({
     top: topPadding + newTop,
-    left: newLeft
+    left: leftPadding + newLeft
   });
   if (a1 || b1) {
     //console.log('obj did not pass throw error', 'left', a1, 'top', b1);
     return 0;
   }
   const sc4 = applyScoreToFontSize(fontSize);
-  return (sc4 + scoreFactor);
+  return sc4;
 }
 
 const minimumOfAll = function(arr:number[]){
@@ -303,6 +302,7 @@ export function wrapText(obj: object|any, text:string){
   } else {
     returnValue = true
   }
+  console.log('scroreArray', scroreArray);
 
   let biggestScore = 0 ;
   let biggestScoreCombo = "" ;
